@@ -69,9 +69,8 @@ from sympy import fourier_series, pi, plot
 from sympy.abc import x
 
 f = sp.Piecewise(
-    (-1, x <= 0),
-    (1, x >= 0)
-
+    (1, -pi/2 <= x <= pi/2),
+    -1
 )
 
 s = fourier_series(f, (x, -pi, pi))
