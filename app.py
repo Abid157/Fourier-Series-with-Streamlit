@@ -78,9 +78,9 @@ s = fourier_series(f, (x, -pi, pi))
 s_i = [s.truncate(n=i) for i in range(1, h + 1)]
 p = plot(f, *s_i, (x, -pi, pi), show=False, legend=True)
 
-for i in range(1, h + 1):
-    p[i].line_color = (2*i, 0, 0, 0.5)
-    p[i].label = f"n = {i}"
+for i in range(h):
+    p[i].line_color = (2 * i, 0, 0, 0.5)
+    p[i].label = f"n = {i + 1}"
 
 p.show()
 st.pyplot(p._backend.fig)
