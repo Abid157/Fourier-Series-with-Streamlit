@@ -63,23 +63,24 @@ ax.legend()
 
 st.pyplot(fig)
 
+st.title("Using sympy")
+import sympy as sp
 from sympy import fourier_series, pi, plot
 from sympy.abc import x
-f = x
-s = fourier_series(f, (x, -pi, pi))
-s1 = s.truncate(n = 3)
-s2 = s.truncate(n = 5)
-s3 = s.truncate(n = 7)
-p = plot(f, s1, s2, s3, (x, -pi, pi), show=False, legend=True)
 
-p[0].line_color = 'red'
-p[0].label = 'x'
-p[1].line_color = 'green'
-p[1].label = 'n=3'
-p[2].line_color = 'blue'
-p[2].label = 'n=5'
-p[3].line_color = 'black'
-p[3].label = 'n=7'
+f = sp.Piecewise(
+    (-1, x <= 0),
+    (1, x >= 0)
+
+)
+
+s = fourier_series(f, (x, -pi, pi))
+s_i = [s.truncate(n=i) for i in range(1, h + 1)]
+p = plot(f, s_i, (x, -pi, pi), show=False, legend=True)
+
+for i in range(1, h + 1):
+    p[i].line_color = (2*i, 0, 0, 0.5)
+    p[i].label = f"n = {i}"
 
 p.show()
 st.pyplot(p._backend.fig)
