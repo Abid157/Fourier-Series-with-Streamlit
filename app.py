@@ -75,7 +75,7 @@ f = sp.Piecewise(
 )
 
 s = fourier_series(f, (x, -pi, pi))
-s_i = [s.truncate(n=i) for i in range(1, h + 1)]
+s_i = [s.truncate(n=i) - s.truncate(n=i-1) for i in range(1, h + 1)]
 p = plot(f, *s_i, (x, -pi, pi), line_color=lambda x: 2*x, show=False, legend=True)
 
 for i in range(1, h + 1):
