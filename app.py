@@ -75,7 +75,9 @@ s = fourier_series(f, (x, -pi, pi))
 st.write("Function:")
 st.latex(latex(f))
 st.write("Fourier Series:")
-st.latex(latex(s.a0) + latex(s.an) + latex(s.bn))
+st.latex('a_0 = ' + latex(s.a0)) 
+st.latex('a(n) = ' + latex(s.an.formula))
+st.latex('b(n) = ' + latex(s.bn.formula))
 
 p = plot(f, *s[:h], (x, -pi, pi), line_color=lambda x: 2*x, show=False, legend=True)
 for i in range(1, h + 1):
