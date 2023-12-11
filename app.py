@@ -68,10 +68,8 @@ import sympy as sp
 from sympy import fourier_series, pi, plot
 from sympy.abc import x
 
-f = sp.Piecewise(
-    (1, 2 * abs(x) <= pi),
-    -1
-)
+# Define the function to be approximated with its Fourier series
+f = sp.Piecewise((1, sp.Abs(x) < pi), (-1, True))
 
 s = fourier_series(f, (x, -pi, pi))
 s_i = [s.truncate(n=i) - s.truncate(n=i-1) for i in range(1, h + 1)]
