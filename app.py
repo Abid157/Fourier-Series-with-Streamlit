@@ -46,19 +46,14 @@ p.show()
 st.pyplot(p._backend.fig)
 
 st.header("Fourier Series Harmonics")
-p = plot(f, (x, -pi, pi), show=False, legend=True, label='f(x)', line_color='black')
-i = 0
-for s_i in s:
-    if s_i:
-        i += 1
-        p.append(plot(s_i, (x, -pi, pi), line_color=hsv_to_rgb(i / h, 1, 1))[0])
-        if i >= h:
-            break
+p = plot(f, *s[:h] (x, -pi, pi), show=False, legend=True, label='f(x)', line_color='black')
+for i in range(1, h + 1):
+    p[i].line_color = hsv_to_rgb(i / h, 1, 1)
 
 p.show()
 st.pyplot(p._backend.fig)
 
-an, bn, cn = [], [], []
+an, bn, cn = [a0], [0], [a0]
 for i in range(1, h + 1):
     a = abs(s.an.coeff(i).subs(x, 0))
     b = s.bn.coeff(i).subs(x, pi/(2*i))
