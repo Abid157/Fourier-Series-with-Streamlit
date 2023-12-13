@@ -8,7 +8,8 @@ from sympy.abc import x
 
 # Streamlit App
 import streamlit as st
-st.title("Fourier Series Approximation")
+st.title("Fourier Series and Frequency Spectrum")
+st.header("Fourier Series Approximation")
 
 try:
     st.write('Define a function on period ' + r'$[-\pi, \pi]$')
@@ -33,7 +34,7 @@ st.latex(f"a(n) = {latex(sp.simplify(an)) if an else 0}")
 bn = s.bn.coeff(n).as_coefficient(sp.sin(n*x))
 st.latex(f"b(n) = {latex(sp.simplify(bn)) if bn else 0}")
 
-st.title("Fourier Series Plotter")
+st.header("Fourier Series Plotter")
 h = st.number_input("Number of Harmonics", min_value=1, max_value=100, value=7, step=1)
 p = plot(f, s.truncate(n=h), (x, -pi, pi), show=False, legend=True)
 p[0].line_color = 'black'
@@ -44,7 +45,7 @@ p[1].label=f'Fourier Series with {h} harmonics'
 p.show()
 st.pyplot(p._backend.fig)
 
-st.title("Fourier Series Harmonics")
+st.header("Fourier Series Harmonics")
 p = plot(f, (x, -pi, pi), show=False, legend=True, label='f(x)', line_color='black')
 i = 0
 for s_i in s:
@@ -80,5 +81,5 @@ ax.set_ylabel('Amplitude')
 ax.set_title('Frequency Spectrum')
 ax.legend()
 
-st.title("Frequency Spectrum")
+st.header("Frequency Spectrum")
 st.pyplot(fig)
