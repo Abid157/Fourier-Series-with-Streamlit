@@ -46,7 +46,7 @@ p.show()
 st.pyplot(p._backend.fig)
 
 st.header("Fourier Series Harmonics")
-p = plot(f, *s[:h] (x, -pi, pi), show=False, legend=True, label='f(x)', line_color='black')
+p = plot(f, *s[:h], (x, -pi, pi), show=False, legend=True, label='f(x)', line_color='black')
 for i in range(1, h + 1):
     p[i].line_color = hsv_to_rgb(i / h, 1, 1)
 
