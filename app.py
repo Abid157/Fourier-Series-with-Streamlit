@@ -7,34 +7,35 @@ from colorsys import hsv_to_rgb
 
 # Streamlit App
 import streamlit as st
-st.title("Fourier Series and Frequency Spectrum")
+st.header("Fourier Series and Frequency Spectrum")
 
-try:
-    st.write('Define a function on period ' + r'$[-\pi, \pi]$')
-    f = st.text_input(label=r'$f(x) := $', value='Piecewise((1, x > 0), (-1, True))')
-    f = simplify(sympify(f))
-except Exception as e:
-    st.error(e)
-    st.write("Could not parse function. Please try again.")
-    f = Piecewise((1, x > 0), (-1, True))
+with st.sidebar:
+    try:
+        st.write('Define a function on period ' + r"$[-\pi, \pi]$")
+        f = st.text_input(label=r'$f(x) := $', value='Piecewise((1, x > 0), (-1, True))')
+        f = simplify(sympify(f))
+    except Exception as e:
+        st.error(e)
+        st.write("Could not parse function. Please try again.")
+        f = Piecewise((1, x > 0), (-1, True))
 
-h = st.slider("Number of Harmonics", min_value=1, max_value=30, value=7, step=1)
-s = fourier_series(f, (x, -pi, pi))
+    h = st.slider("Number of **Harmonics**", min_value=1, max_value=30, value=7, step=1)
+    s = fourier_series(f, (x, -pi, pi))
 
 tabs = st.tabs(["Fourier Series Approximation", "Fourier Series Plotter", "Fourier Series Harmonics", "Frequency Spectrum"])
 
 with tabs[0]:
     # st.header("Fourier Series Approximation")
-    st.write("Function:")
+    st.write("**Function:**")
     st.latex('f(x) = ' + latex(f))
-    st.write("Coefficients:")
+    st.write("**Coefficients:**")
     st.latex('a_0 = ' + latex(s.a0)) 
     n = symbols('n', real=True, positive=True, integer=True)
     an = s.an.coeff(n).as_coefficient(cos(n*x))
     st.latex(f"a(n) = {latex(simplify(an)) if an else 0}")
     bn = s.bn.coeff(n).as_coefficient(sin(n*x))
     st.latex(f"b(n) = {latex(simplify(bn)) if bn else 0}")
-    st.write("Fourier Series:")
+    st.write("**Fourier Series:**")
     st.latex('f(x) = ' + latex(s))
 
 with tabs[1]:
